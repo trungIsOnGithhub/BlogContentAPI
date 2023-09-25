@@ -1,4 +1,4 @@
-package com.springboot.blog;
+package com.api.forum;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
