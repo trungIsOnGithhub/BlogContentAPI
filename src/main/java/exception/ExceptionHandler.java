@@ -2,6 +2,8 @@ package com.api.forum.exception;
 
 import com.api.forum.payload.ExceptionDTO;
 
+import com.api.forum.exception.types.NotFoundException;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -20,6 +22,7 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+    // to be inherited
     static protected makeResponseEntity(Exception exception, WebRequest webRequest, HttpStatus responseStatus) {
         ExceptionInfo exceptionInfo = new ExceptionInfo(new Date(),
                 exception.getMessage(), webRequest.getDescription(false));
@@ -29,6 +32,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ExceptionInfo> handleAccessDeniedException(AccessDeniedException exception, WebRequest webRequest) {
         return makeResponseEntity(exception, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<ExceptionInfo> handleAccessDeniedException(NotFoundException exception, WebRequest webRequest) {
+        return makeResponseEntity(exception, HttpStatus.NOT_FOUND);
     }
 
     // Global catch
