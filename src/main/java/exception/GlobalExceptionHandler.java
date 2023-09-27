@@ -24,8 +24,7 @@ import java.util.Map;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     // to be inherited
     static protected ResponseEntity<ExceptionDTO> makeResponseEntity(Exception exception, WebRequest webRequest, HttpStatus responseStatus) {
-        ExceptionDTO ExceptionDTO = new ExceptionDTO(new Date(),
-                exception.getMessage(), webRequest.getDescription(false));
+        ExceptionDTO ExceptionDTO = new ExceptionDTO(new Date(), exception.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<ExceptionDTO>(ExceptionDTO, responseStatus);
     }
 

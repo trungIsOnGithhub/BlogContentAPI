@@ -12,7 +12,6 @@ import jakarta.validation.constraints.NotEmpty;
 public class ExceptionDTO {
 	@NotEmpty
     private Date timestamp;
-	
 	@NotEmpty
     private String message;
     private String details;
