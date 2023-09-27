@@ -1,8 +1,8 @@
-package com.api.forum.exception;
+package exception;
 
 import com.api.forum.payload.ExceptionDTO;
 
-import com.api.forum.exception.types.NotFoundException;
+import exception.types.NotFoundException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -23,26 +23,26 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     // to be inherited
-    static protected makeResponseEntity(Exception exception, WebRequest webRequest, HttpStatus responseStatus) {
-        ExceptionInfo exceptionInfo = new ExceptionInfo(new Date(),
+    static protected ResponseEntity<ExceptionDTO> makeResponseEntity(Exception exception, WebRequest webRequest, HttpStatus responseStatus) {
+        ExceptionDTO ExceptionDTO = new ExceptionDTO(new Date(),
                 exception.getMessage(), webRequest.getDescription(false));
-        return new ResponseEntity<>(exceptionInfo, responseStatus);
+        return new ResponseEntity<ExceptionDTO>(ExceptionDTO, responseStatus);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ExceptionInfo> handleAccessDeniedException(AccessDeniedException exception, WebRequest webRequest) {
-        return makeResponseEntity(exception, HttpStatus.UNAUTHORIZED);
+    public ResponseEntity<ExceptionDTO> handleAccessDeniedException(AccessDeniedException exception, WebRequest webRequest) {
+        return makeResponseEntity(exception, webRequest, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionInfo> handleAccessDeniedException(NotFoundException exception, WebRequest webRequest) {
-        return makeResponseEntity(exception, HttpStatus.NOT_FOUND);
+    public ResponseEntity<ExceptionDTO> handleAccessDeniedException(NotFoundException exception, WebRequest webRequest) {
+        return makeResponseEntity(exception, webRequest, HttpStatus.NOT_FOUND);
     }
 
     // Global catch
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionInfo> handleGlobalException(Exception exception, WebRequest webRequest){
-        return makeResponseEntity(exception, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ExceptionDTO> handleGlobalException(Exception exception, WebRequest webRequest){
+        return makeResponseEntity(exception, webRequest, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Override
