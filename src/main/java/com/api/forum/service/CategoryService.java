@@ -4,7 +4,7 @@ import com.api.forum.payload.CategoryDTO;
 
 import java.util.List;
 
-public interface Category {
+public interface CategoryService {
     CategoryDTO addCategory(CategoryDTO CategoryDTO);
     CategoryDTO getCategory(Long id);
     List<CategoryDTO> getAllCategories();
