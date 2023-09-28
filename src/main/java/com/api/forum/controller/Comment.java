@@ -18,7 +18,7 @@ import com.api.forum.payload.CommentDTO;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/posts/{postId}/comments")
 public class Comment {
     private com.api.forum.service.Comment service;
 
@@ -26,25 +26,25 @@ public class Comment {
         this.service = service;
     }
 
-    @GetMapping("/posts/{postId}/comments")
+    @GetMapping
     public List<CommentDTO> getCommentsByPostId(@PathVariable(value = "postId") Long postId){
         return this.service.getCommentsByPostId(postId);
     }
     
-    @PostMapping("/posts/{postId}/comments")
+    @PostMapping
     public ResponseEntity<CommentDTO> createComment(@PathVariable(value = "postId") long postId,
                                                     @Valid @RequestBody CommentDTO dto){
         return new ResponseEntity<CommentDTO>(this.service.createComment(postId, dto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/posts/{postId}/comments/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CommentDTO> getCommentById(@PathVariable(value = "postId") Long postId,
                                                      @PathVariable(value = "id") Long commentId){
         CommentDTO CommentDTO = this.service.getCommentById(postId, commentId);
         return new ResponseEntity<>(CommentDTO, HttpStatus.OK);
     }
 
-    @PutMapping("/posts/{postId}/comments/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CommentDTO> updateComment(@PathVariable(value = "postId") Long postId,
                                                     @PathVariable(value = "id") Long commentId,
                                                     @Valid @RequestBody CommentDTO CommentDTO){
@@ -52,7 +52,7 @@ public class Comment {
         return new ResponseEntity<>(updatedComment, HttpStatus.OK);
     }
 
-    @DeleteMapping("/posts/{postId}/comments/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteComment(@PathVariable(value = "postId") Long postId,
                                                 @PathVariable(value = "id") Long commentId){
         this.service.deleteComment(postId, commentId);
