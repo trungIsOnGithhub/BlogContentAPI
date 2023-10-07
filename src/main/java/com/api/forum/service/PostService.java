@@ -5,7 +5,7 @@ import com.api.forum.payload.PostDTOPaged;
 
 import java.util.List;
 
-public interface Post {
+public interface PostService {
     PostDTO createPost(PostDTO postDTO);
     PostDTOPaged getAllPosts(int pageNo, int pageSize, String sortBy, String sortDir);
     PostDTO getPostById(long id);
