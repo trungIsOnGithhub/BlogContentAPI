@@ -2,13 +2,17 @@ package com.api.forum.service.implementation;
 
 import com.api.forum.entity.Role;
 import com.api.forum.entity.User;
-import com.api.forum.exception.APIException;
+import com.api.forum.exception.types.APIException;
 import com.api.forum.payload.LoginDTO;
 import com.api.forum.payload.RegisterDTO;
-import com.api.forum.repository.RoleRepository;
-import com.api.forum.repository.UserRepository;
+import com.api.forum.repository.RoleReposi;
+import com.api.forum.repository.UserReposi;
 import com.api.forum.security.JWTProvider;
 import com.api.forum.service.AuthService;
+
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,21 +22,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthServiceImpl {
+public class AuthServiceImpl implements AuthService {
     private AuthenticationManager authenticationManager;
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
+    private UserReposi userReposi;
+    private RoleReposi roleReposi;
     private PasswordEncoder passwordEncoder;
     private JWTProvider jwtTokenProvider;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
-                           UserRepository userRepository,
-                           RoleRepository roleRepository,
+                           UserReposi userReposi,
+                           RoleReposi roleReposi,
                            PasswordEncoder passwordEncoder,
                            JWTProvider jwtTokenProvider) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.userReposi = userReposi;
+        this.roleReposi = roleReposi;
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
         this.authenticationManager = authenticationManager;
@@ -53,12 +57,12 @@ public class AuthServiceImpl {
 
     @Override
     public String register(RegisterDTO registerDTO) {
-        if(userRepository.existsByUsername(registerDTO.getUsername())){
-            throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
+        if(userReposi.existsByUsername(registerDTO.getUsername())){
+            throw new APIException(HttpStatus.BAD_REQUEST, "Username is already exists!.");
         }
 
-        if(userRepository.existsByEmail(registerDTO.getEmail())){
-            throw new BlogAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
+        if(userReposi.existsByEmail(registerDTO.getEmail())){
+            throw new APIException(HttpStatus.BAD_REQUEST, "Email is already exists!.");
         }
 
         User user = new User();
@@ -68,11 +72,11 @@ public class AuthServiceImpl {
         user.setPassword(passwordEncoder.encode(registerDTO.getPassword()));
 
         Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName("ROLE_USER").get();
+        Role userRole = roleReposi.findByName("ROLE_USER").get();
         roles.add(userRole);
         user.setRoles(roles);
 
-        userRepository.save(user);
+        userReposi.save(user);
 
         return "User registered successfully!.";
     }

@@ -2,8 +2,8 @@ package com.api.forum.service.implementation;
 
 import com.api.forum.entity.Comment;
 import com.api.forum.entity.Post;
-import exception.types.APIException;
-import exception.types.NotFoundException;
+import com.api.forum.exception.types.APIException;
+import com.api.forum.exception.types.NotFoundException;
 import com.api.forum.payload.CommentDTO;
 import com.api.forum.repository.CommentReposi;
 import com.api.forum.repository.PostReposi;
