@@ -27,7 +27,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/v1")
 public class Post {
-	private com.api.forum.service.Post service;
+	private com.api.forum.service.PostService service;
 
     @ApiResponse(
             responseCode = "200",

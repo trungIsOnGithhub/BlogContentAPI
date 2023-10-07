@@ -22,17 +22,17 @@ public class AuthController {
 
     @PostMapping(value = {"/login", "/signin"})
     public ResponseEntity<AuthJWT> login(@RequestBody LoginDTO dto){
-        String token = authService.login(dto);
+        String token = this.service.login(dto);
 
         AuthJWT authJWT = new AuthJWT();
         authJWT.setAccessToken(token);
 
-        return ResponseEntity<AuthJWT>(authJWT, HttpStatus.OK);
+        return new ResponseEntity<AuthJWT>(authJWT, HttpStatus.OK);
     }
 
     @PostMapping(value = {"/register", "/signup"})
     public ResponseEntity<String> register(@RequestBody RegisterDTO dto){
-        String response = authService.register(dto);
+        String response = this.service.register(dto);
         return new ResponseEntity<String>(response, HttpStatus.CREATED);
     }
 }

@@ -20,9 +20,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/v1/posts/{postId}/comments")
 public class Comment {
-    private com.api.forum.service.Comment service;
+    private com.api.forum.service.CommentService service;
 
-    public Comment(com.api.forum.service.Comment service) {
+    public Comment(com.api.forum.service.CommentService service) {
         this.service = service;
     }
 
