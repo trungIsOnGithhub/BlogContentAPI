@@ -1,6 +1,6 @@
-package com.springboot.blog.security;
+package com.api.forum.security;
 
-import com.springboot.blog.exception.APIException;
+import com.api.forum.exception.types.APIException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -15,10 +15,10 @@ import java.util.Date;
 @Component
 public class JWTProvider {
 
-    @Value("${app.jwt-secret}")
+    @Value("${app-jwt-secret}")
     private String secret;
 
-    @Value("${app-jwt-expiration-milliseconds}")
+    @Value("${app-jwt-expiration-in-millisecond}")
     private long exprirationTimestamp;
 
     public String generateToken(Authentication authentication){
@@ -43,7 +43,7 @@ public class JWTProvider {
 
     public String getUsername(String token){
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key())
+                .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
