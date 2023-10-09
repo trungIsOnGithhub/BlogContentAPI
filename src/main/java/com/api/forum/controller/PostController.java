@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1")
-public class Post {
+public class PostController {
 	private com.api.forum.service.PostService service;
 
     @ApiResponse(
