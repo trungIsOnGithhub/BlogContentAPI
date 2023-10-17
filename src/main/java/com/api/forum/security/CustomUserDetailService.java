@@ -1,6 +1,6 @@
 package com.api.forum.security;
 
-import com.api.forum.repository.UserRepository;
+import com.api.forum.repository.UserReposi;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,10 +12,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
-    private UserRepository repository;
+public class CustomUserDetailService implements UserDetailsService {
+    private UserReposi repository;
 
-    public CustomUserDetailsService(UserRepository userRepository) {
+    public CustomUserDetailService(UserReposi userRepository) {
         this.repository = userRepository;
     }
 

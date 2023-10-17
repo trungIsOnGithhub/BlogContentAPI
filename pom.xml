@@ -9,10 +9,10 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.api.forum</groupId>
-	<artifactId>springboot-blog-rest-api</artifactId>
+	<artifactId>content-rest-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-blog-rest-api</name>
-	<description>Spring boot blog application rest api&apos;s</description>
+	<description>content management placeholder</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
