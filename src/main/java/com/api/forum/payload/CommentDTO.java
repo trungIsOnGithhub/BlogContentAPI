@@ -1,5 +1,7 @@
 package com.api.forum.payload;
 
+import com.api.forum.entity.User;
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
@@ -21,4 +23,7 @@ public class CommentDTO {
 	@NotEmpty
 	@Size(min = 16, message = "Comment content must be minimum 16 characters")
 	private String content;
+
+	@NotEmpty
+	private User owner;
 }
