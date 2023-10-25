@@ -26,7 +26,6 @@ public class PostDTO {
 
     @Schema(description = "Blog Post Content")
     // post content should not be null or empty
-    @NotEmpty
     private String content;
     private Set<CommentDTO> comments;
 

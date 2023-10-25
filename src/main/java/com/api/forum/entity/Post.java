@@ -35,7 +35,8 @@ public class Post {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    // drop??
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User owner;
 }
