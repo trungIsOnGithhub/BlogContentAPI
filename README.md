@@ -1,12 +1,12 @@
 ### Spring REST API for blogging content management
 
-> Using MySQL Community Server 8.0.34, JDK 17.0.2, Eclipse IDE 4.25, Maven 3.8.8
+> Using MySQL Community Server 8.0.34, JDK 17.0.2, Eclipse IDE 4.25, Maven 3.8.8, VSCode
 
 #### For API documentation and(maybe demos): visit below link
 
 [Azure Web App](http://javaspringtest2.azurewebsites.net/)
 
-#### How to run locally
+#### How to run on local machine
 
 1. Prepare a MySQL instance: [Normal Installation](https://dev.mysql.com/downloads/installer/), Docker Images(https://hub.docker.com/_/mysql), Remote Database...
 
@@ -26,7 +26,13 @@ If using command line, run the app with below command, auto reload included.
 or in Windows:
 ```.\mvnw.cmd spring-boot:run``
 
+Basic Rest API for a blogging content website with usecases:
+- CRUD Category(admin)
+- CRUD Post(admin)
+- CRUD Comments on Post
+- Authentication
 
+**Authorization disable for testing**
 
 > IoC - DI - Proxy in Spring framework
 > DTO design pattern, instead of calling request for each data part(attribute of an object...),
