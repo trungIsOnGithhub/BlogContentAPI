@@ -29,7 +29,6 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public CommentDTO createComment(long postId, CommentDTO commentDTO) {
-
         Comment comment = mapToEntity(commentDTO);
 
         Post post = postReposi.findById(postId).orElseThrow( () -> new NotFoundException("Post", "id", postId) );
@@ -72,8 +71,8 @@ public class CommentServiceImpl implements CommentService {
             throw new APIException(HttpStatus.BAD_REQUEST, "Comment does not belongs to required post");
         }
 
-//        comment.setName(commentRequest.getName());
-        comment.setOwner(commentRequest.getOwner());
+        comment.setName(commentRequest.getName());
+        comment.setEmail(commentRequest.getEmail());
         comment.setContent(commentRequest.getContent());
 
         Comment updatedComment = commentReposi.save(comment);
@@ -82,16 +81,14 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(Long postId, Long commentId) {
-        // retrieve post entity by id
-        Post post = postReposi.findById(postId).orElseThrow(
-                () -> new NotFoundException("Post", "id", postId));
+        Post post = postReposi.findById(postId)
+                                .orElseThrow( () -> new NotFoundException("Post", "id", postId) );
 
-        // retrieve comment by id
-        Comment comment = commentReposi.findById(commentId).orElseThrow(() ->
-                new NotFoundException("Comment", "id", commentId));
+        Comment comment = commentReposi.findById(commentId)
+                                .orElseThrow( () -> new NotFoundException("Comment", "id", commentId) );
 
         if( !comment.getPost().getId().equals(post.getId()) ){
-            throw new APIException(HttpStatus.BAD_REQUEST, "Comment does not belongs to required post");
+            throw new APIException(HttpStatus.BAD_REQUEST, "Comment does not belongs to given post");
         }
 
         commentReposi.delete(comment);

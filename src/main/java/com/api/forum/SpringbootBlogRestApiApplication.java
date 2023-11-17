@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringbootBlogRestApiApplication {
-
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();

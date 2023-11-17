@@ -24,7 +24,7 @@ import java.util.Map;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     // to be inherited
     static protected ResponseEntity<ExceptionDTO> makeResponseEntity(Exception exception, WebRequest webRequest, HttpStatus responseStatus) {
-        ExceptionDTO ExceptionDTO = new ExceptionDTO(new Date(), exception.getMessage(), webRequest.getDescription(false));
+        ExceptionDTO ExceptionDTO = new ExceptionDTO(new Date(), "Temporary Error From Server, You Can Comeback Later!", webRequest.getDescription(false));
         return new ResponseEntity<ExceptionDTO>(ExceptionDTO, responseStatus);
     }
 
@@ -35,12 +35,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionDTO> handleAccessDeniedException(NotFoundException exception, WebRequest webRequest) {
-        return makeResponseEntity(exception, webRequest, HttpStatus.NOT_FOUND);
+        return makeResponseEntity(new Exception("Temporary Error From Server, You Can Comeback Later!"), webRequest, HttpStatus.NOT_FOUND);
     }
 
     // Global catch
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionDTO> handleGlobalException(Exception exception, WebRequest webRequest){
+
         return makeResponseEntity(exception, webRequest, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -52,7 +53,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) ->{
             String fieldName = ((FieldError)error).getField();
-            String message = error.getDefaultMessage();
+            String message = "Temporary Error From Server, You Can Comeback Later!";
             errors.put(fieldName, message);
         });
 
