@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/categories")
+@RequestMapping("/api/trial/categories")
 public class CategoryController {
     private com.api.forum.service.CategoryService service;
 
@@ -18,7 +18,7 @@ public class CategoryController {
         this.service = service;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO CategoryDTO){
         CategoryDTO savedCategory = this.service.addCategory(CategoryDTO);
@@ -36,14 +36,14 @@ public class CategoryController {
         return ResponseEntity.ok(this.service.getAllCategories());
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO CategoryDTO,
                                                       @PathVariable("id") Long categoryId){
         return ResponseEntity.ok(this.service.updateCategory(CategoryDTO, categoryId));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable("id") Long categoryId){
         this.service.deleteCategory(categoryId);

@@ -18,11 +18,11 @@ import com.api.forum.payload.CommentDTO;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/posts/{postId}/comments")
-public class Comment {
+@RequestMapping("/api/trial/posts/{postId}/comments")
+public class CommentController {
     private com.api.forum.service.CommentService service;
 
-    public Comment(com.api.forum.service.CommentService service) {
+    public CommentController(com.api.forum.service.CommentService service) {
         this.service = service;
     }
 

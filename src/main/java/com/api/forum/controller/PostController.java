@@ -2,6 +2,7 @@ package com.api.forum.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.forum.constants.App;
-import com.api.forum.payload.CommentDTO;
+// import com.api.forum.payload.CommentDTO;
 import com.api.forum.payload.PostDTO;
 import com.api.forum.payload.PostDTOPaged;
 
@@ -25,8 +26,9 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/trial")
 public class PostController {
+    @Autowired
 	private com.api.forum.service.PostService service;
 
     @ApiResponse(
@@ -60,9 +62,8 @@ public class PostController {
     @SecurityRequirement(
             name = "Bear Authentication"
     )
-    // create blog post rest api
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
+    // @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/post")
     public ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO dto){
         return new ResponseEntity<PostDTO>(this.service.createPost(dto), HttpStatus.CREATED);
     }
@@ -83,17 +84,15 @@ public class PostController {
     @SecurityRequirement(
             name = "Bear Authentication"
     )
-    @PreAuthorize("hasRole('ADMIN')")
+    // @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/posts/{postId}")
-    public ResponseEntity<String> deletePost(@PathVariable(name = "postId") long id){
-
+    public ResponseEntity<String> deletePost(@PathVariable(name = "postId") long id) {
         this.service.deletePostById(id);
-
-        return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
+        return ResponseEntity.ok("Post entity deleted successfully");
     }
 
     @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<PostDTO>> getPostsByCategory(@PathVariable(name = "categoryId") Long categoryId){
+    public ResponseEntity<List<PostDTO>> getPostsByCategory(@PathVariable(name = "categoryId") Long categoryId) {
         List<PostDTO> PostDTOs = this.service.getPostsByCategory(categoryId);
         return ResponseEntity.ok(PostDTOs);
     }
