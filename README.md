@@ -1,5 +1,34 @@
-### Spring REST API for content management system - forum
+### Spring REST API for blogging content management
 
-IoC - DI - Proxy in Spring framework
-DTO design pattern, instead of calling request for each data part(attribute of an object...), combined in DTO and bring around
---> in complex app, mapping from DTO to Model --> ResponseEntity<>(DTO, HttpStatus)
+> Using MySQL Community Server 8.0.34, JDK 17.0.2, Eclipse IDE 4.25, Maven 3.8.8
+
+#### For API documentation and(maybe demos): visit below link
+
+[Azure Web App](http://javaspringtest2.azurewebsites.net/)
+
+#### How to run locally
+
+1. Prepare a MySQL instance: [Normal Installation](https://dev.mysql.com/downloads/installer/), Docker Images(https://hub.docker.com/_/mysql), Remote Database...
+
+Change ```src/main/resources/application.properties``` for database connection and hibernate behavior
+
+2. Modified JWT Secrect with another value if needed, a sample key has been given, key has to be long enough. Change the expiration time of jwt if need.
+
+3. Build and Run Project in any IDE.
+
+If using command line, buid the project with below command
+```./mvnw clean package```
+or in Windows:
+```.\mvnw.cmd clean package```
+
+If using command line, run the app with below command, auto reload included.
+```./mvnw spring-boot:run```
+or in Windows:
+```.\mvnw.cmd spring-boot:run``
+
+
+
+> IoC - DI - Proxy in Spring framework
+> DTO design pattern, instead of calling request for each data part(attribute of an object...),
+> combined in DTO and bring around
+> --> in complex app, mapping from DTO to Model --> ResponseEntity<>(DTO, HttpStatus)
