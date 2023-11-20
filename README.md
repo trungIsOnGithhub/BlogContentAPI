@@ -16,15 +16,15 @@ Change ```src/main/resources/application.properties``` for database connection a
 
 3. Build and Run Project in any IDE.
 
-If using command line, buid the project with below command
-```./mvnw clean package```
-or in Windows:
-```.\mvnw.cmd clean package```
+- If using command line, buid the project with below command
+```./mvnw clean install```
+- or in Windows:
+```.\mvnw.cmd clean install```
 
-If using command line, run the app with below command, auto reload included.
+- If using command line, run the app with below command, auto reload included.
 ```./mvnw spring-boot:run```
-or in Windows:
-```.\mvnw.cmd spring-boot:run``
+- or in Windows:
+```.\mvnw.cmd spring-boot:run```
 
 Basic Rest API for a blogging content website with usecases:
 - CRUD Category(admin)
