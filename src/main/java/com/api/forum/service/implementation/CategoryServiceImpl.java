@@ -3,7 +3,7 @@ package com.api.forum.service.implementation;
 import com.api.forum.entity.Category;
 import com.api.forum.exception.types.NotFoundException;
 import com.api.forum.payload.CategoryDTO;
-import com.api.forum.repository.CategoryReposi;
+import com.api.forum.repository.CategoryRepository;
 import com.api.forum.service.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryReposi categoryRepository;
+    private CategoryRepository categoryRepository;
     private ModelMapper modelMapper;
 
-    public CategoryServiceImpl(CategoryReposi categoryRepository, ModelMapper modelMapper) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, ModelMapper modelMapper) {
         this.categoryRepository = categoryRepository;
         this.modelMapper = modelMapper;
     }

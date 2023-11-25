@@ -62,7 +62,7 @@ public class PostController {
     @SecurityRequirement(
             name = "Bear Authentication"
     )
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/post")
     public ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO dto){
         return new ResponseEntity<PostDTO>(this.service.createPost(dto), HttpStatus.CREATED);
@@ -84,7 +84,7 @@ public class PostController {
     @SecurityRequirement(
             name = "Bear Authentication"
     )
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @DeleteMapping("/posts/{postId}")
     public ResponseEntity<String> deletePost(@PathVariable(name = "postId") long id) {
         this.service.deletePostById(id);

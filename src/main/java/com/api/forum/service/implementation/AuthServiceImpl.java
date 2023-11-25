@@ -5,8 +5,8 @@ import com.api.forum.entity.User;
 import com.api.forum.exception.types.APIException;
 import com.api.forum.payload.LoginDTO;
 import com.api.forum.payload.RegisterDTO;
-import com.api.forum.repository.RoleReposi;
-import com.api.forum.repository.UserReposi;
+import com.api.forum.repository.RoleRepository;
+import com.api.forum.repository.UserRepository;
 import com.api.forum.security.JWTProvider;
 import com.api.forum.service.AuthService;
 
@@ -24,15 +24,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthServiceImpl implements AuthService {
     private AuthenticationManager authenticationManager;
-    private UserReposi userReposi;
-    private RoleReposi roleReposi;
+    private UserRepository userReposi;
+    private RoleRepository roleReposi;
     private PasswordEncoder passwordEncoder;
     private JWTProvider jwtTokenProvider;
 
 
     public AuthServiceImpl(AuthenticationManager authenticationManager,
-                           UserReposi userReposi,
-                           RoleReposi roleReposi,
+                           UserRepository userReposi,
+                           RoleRepository roleReposi,
                            PasswordEncoder passwordEncoder,
                            JWTProvider jwtTokenProvider) {
         this.userReposi = userReposi;

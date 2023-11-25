@@ -5,7 +5,7 @@ import com.api.forum.entity.Post;
 import com.api.forum.exception.types.APIException;
 import com.api.forum.exception.types.NotFoundException;
 import com.api.forum.payload.CommentDTO;
-import com.api.forum.repository.CommentReposi;
+import com.api.forum.repository.CommentRepository;
 import com.api.forum.repository.PostReposi;
 import com.api.forum.service.CommentService;
 import org.modelmapper.ModelMapper;
@@ -17,11 +17,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
-    private CommentReposi commentReposi;
+    private CommentRepository commentReposi;
     private PostReposi postReposi;
     private ModelMapper mapper;
 
-    public CommentServiceImpl(CommentReposi commentReposi, PostReposi postReposi, ModelMapper mapper) {
+    public CommentServiceImpl(CommentRepository commentReposi, PostReposi postReposi, ModelMapper mapper) {
         this.commentReposi = commentReposi;
         this.postReposi = postReposi;
         this.mapper = mapper;

@@ -14,7 +14,7 @@ import com.api.forum.entity.Post;
 import com.api.forum.exception.types.NotFoundException;
 import com.api.forum.payload.PostDTO;
 import com.api.forum.payload.PostDTOPaged;
-import com.api.forum.repository.CategoryReposi;
+import com.api.forum.repository.CategoryRepository;
 import com.api.forum.repository.PostReposi;
 import com.api.forum.service.PostService;
 
@@ -30,7 +30,7 @@ public class PostServiceImpl implements PostService {
     private ModelMapper mapper;
 
     @Autowired
-    private CategoryReposi categoryRepository;
+    private CategoryRepository categoryRepository;
 
     public PostDTO createPost(PostDTO postDto) {
         Category category = categoryRepository.findById(postDto.getCategoryId())

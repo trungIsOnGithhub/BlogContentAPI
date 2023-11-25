@@ -11,12 +11,22 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "role")
+@Table(
+	name = "role",
+	uniqueConstraint = @UniqueConstraint(
+		name = "RoleLevelDivision",
+		columnNames = {"name", "level"}
+	)
+)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
+    
+    // create directly in sql schema
+    @Column(columnDefinition = "INTEGER DEFAULT 0 CHECK level >= 1")
+    private Integer level;
 }

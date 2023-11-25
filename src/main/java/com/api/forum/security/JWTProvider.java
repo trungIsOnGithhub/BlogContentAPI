@@ -18,7 +18,7 @@ public class JWTProvider {
     @Value("${app-jwt-secret}")
     private String secret;
 
-    @Value("${app-jwt-expiration-in-millisecond}")
+    @Value("${app-jwt-expiration-millisecond}")
     private long exprirationTimestamp;
 
     public String generateToken(Authentication authentication){

@@ -22,7 +22,6 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-    // to be inherited
     static protected ResponseEntity<ExceptionDTO> makeResponseEntity(Exception exception, WebRequest webRequest, HttpStatus responseStatus) {
         ExceptionDTO ExceptionDTO = new ExceptionDTO(new Date(), "Temporary Error From Server, You Can Comeback Later!", webRequest.getDescription(false));
         return new ResponseEntity<ExceptionDTO>(ExceptionDTO, responseStatus);
@@ -51,6 +50,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
         Map<String, String> errors = new HashMap<>();
+
         ex.getBindingResult().getAllErrors().forEach((error) ->{
             String fieldName = ((FieldError)error).getField();
             String message = "Temporary Error From Server, You Can Comeback Later!";
