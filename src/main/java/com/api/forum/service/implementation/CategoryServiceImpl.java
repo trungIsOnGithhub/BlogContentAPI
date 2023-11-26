@@ -2,10 +2,12 @@ package com.api.forum.service.implementation;
 
 import com.api.forum.entity.Category;
 import com.api.forum.exception.types.NotFoundException;
+import com.api.forum.payload.CategoryAndNumPostDTO;
 import com.api.forum.payload.CategoryDTO;
 import com.api.forum.repository.CategoryReposi;
 import com.api.forum.service.CategoryService;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,5 +67,9 @@ public class CategoryServiceImpl implements CategoryService {
                 							.orElseThrow(() -> new NotFoundException("Category", "id", categoryId));
 
         categoryRepository.delete(category);
+    }
+
+    public ResponseEntity<List<CategoryAndNumPostDTO>> numPostByCategory(Long id) {
+        return ResponseEntity.ok( this.categoryRepository.getNumPostByCategory(id) );
     }
 }
