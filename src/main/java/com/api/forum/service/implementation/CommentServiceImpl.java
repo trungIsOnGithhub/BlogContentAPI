@@ -35,7 +35,7 @@ public class CommentServiceImpl implements CommentService {
 
         comment.setPost(post);
 
-        Comment newComment =  commentReposi.save(comment);
+        Comment newComment = commentReposi.save(comment);
 
         return mapToDTO(newComment);
     }

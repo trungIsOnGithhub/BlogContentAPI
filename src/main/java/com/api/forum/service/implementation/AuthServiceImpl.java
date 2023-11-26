@@ -5,7 +5,7 @@ import com.api.forum.entity.User;
 import com.api.forum.exception.types.APIException;
 import com.api.forum.payload.LoginDTO;
 import com.api.forum.payload.RegisterDTO;
-import com.api.forum.repository.RoleReposi;
+import com.api.forum.repository.RoleRepository;
 import com.api.forum.repository.UserReposi;
 import com.api.forum.security.JWTProvider;
 import com.api.forum.service.AuthService;
@@ -13,6 +13,7 @@ import com.api.forum.service.AuthService;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,24 +24,29 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
+    @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
     private UserReposi userReposi;
-    private RoleReposi roleReposi;
+    @Autowired
+    private RoleRepository roleReposi;
+    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
     private JWTProvider jwtTokenProvider;
 
 
-    public AuthServiceImpl(AuthenticationManager authenticationManager,
-                           UserReposi userReposi,
-                           RoleReposi roleReposi,
-                           PasswordEncoder passwordEncoder,
-                           JWTProvider jwtTokenProvider) {
-        this.userReposi = userReposi;
-        this.roleReposi = roleReposi;
-        this.passwordEncoder = passwordEncoder;
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.authenticationManager = authenticationManager;
-    }
+    // public AuthServiceImpl(AuthenticationManager authenticationManager,
+    //                        UserReposi userReposi,
+    //                        RoleRepository roleReposi,
+    //                        PasswordEncoder passwordEncoder,
+    //                        JWTProvider jwtTokenProvider) {
+    //     this.userReposi = userReposi;
+    //     this.roleReposi = roleReposi;
+    //     this.passwordEncoder = passwordEncoder;
+    //     this.jwtTokenProvider = jwtTokenProvider;
+    //     this.authenticationManager = authenticationManager;
+    // }
 
     @Override
     public String login(LoginDTO dto) {
