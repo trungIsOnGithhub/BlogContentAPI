@@ -1,6 +1,6 @@
 ### Spring REST API for blogging content management
 
-> Using MySQL Community Server 8.0.34, JDK 17.0.2, Eclipse IDE 4.25, Maven 3.8.8, VSCode
+> Using MySQL Community Server 8.0.34, Oracle JDK 17.0.2, Eclipse IDE 4.25, Maven 3.8.8, VSCode
 
 #### For API documentation and(maybe demos): visit below link
 
@@ -31,6 +31,9 @@ Basic Rest API for a blogging content website with usecases:
 - CRUD Post(admin)
 - CRUD Comments on Post
 - Authentication
+
+#### References
+[The Builder Pattern in Spring Boot Development](https://wiki.yowu.dev/en/Knowledge-base/Spring-Boot/the-builder-pattern-in-spring-boot-development)
 
 **Authorization disable for testing**
 
