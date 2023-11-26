@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -18,11 +20,13 @@ public class CategoryController {
         this.service = service;
     }
 
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO CategoryDTO){
+    public ResponseEntity<CategoryDTO> addCategory(@RequestBody CategoryDTO CategoryDTO) 
+        throws URISyntaxException {
         CategoryDTO savedCategory = this.service.addCategory(CategoryDTO);
-        return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
+        return ResponseEntity.created(new URI(""))
+                                .body(savedCategory);
     }
 
     @GetMapping("/{id}")
@@ -36,14 +40,14 @@ public class CategoryController {
         return ResponseEntity.ok(this.service.getAllCategories());
     }
 
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<CategoryDTO> updateCategory(@RequestBody CategoryDTO CategoryDTO,
                                                       @PathVariable("id") Long categoryId){
         return ResponseEntity.ok(this.service.updateCategory(CategoryDTO, categoryId));
     }
 
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable("id") Long categoryId){
         this.service.deleteCategory(categoryId);
