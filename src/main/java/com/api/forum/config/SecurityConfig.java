@@ -14,6 +14,7 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 // import org.springframework.security.core.userdetails.User;
 // import org.springframework.security.core.userdetails.UserDetails;
@@ -57,16 +58,15 @@ public class SecurityConfig {
 
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) ->
-                        //authorize.anyRequest().authenticated()
-                        authorize.requestMatchers("/api/trial/**").permitAll()
-                                // requestMatchers(HttpMethod.GET, "/api/**").permitAll()
-                                //.requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
-                                // .requestMatchers("/api/auth/**").permitAll()
-                                // .requestMatchers("/swagger-ui/**").permitAll()
-                                // .requestMatchers("/v3/api-docs/**").permitAll()
-                                // .anyRequest().authenticated()
-
-                ).exceptionHandling( exception -> exception
+                    //authorize.anyRequest().authenticated()
+                    // .requestMatchers("/api/trial/**").permitAll()
+                    authorize.requestMatchers(HttpMethod.GET, "/api/trial/**").permitAll()
+                            .requestMatchers("/api/trial/auth/**").permitAll()
+                            .requestMatchers("/swagger-ui/**").permitAll()
+                            .requestMatchers("/v3/api-docs/**").permitAll()
+                            .anyRequest().authenticated()
+                )
+                .exceptionHandling( exception -> exception
                         .authenticationEntryPoint(authenticationEntryPoint)
                 ).sessionManagement( session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -76,4 +76,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    // static final Customizer<AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry>
+    //         httpEndpointSecurityConfig = 
 }
