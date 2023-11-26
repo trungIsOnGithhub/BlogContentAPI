@@ -62,7 +62,7 @@ public class PostController {
     @SecurityRequirement(
             name = "Bear Authentication"
     )
-    // @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/post")
     public ResponseEntity<PostDTO> createPost(@Valid @RequestBody PostDTO dto){
         return new ResponseEntity<PostDTO>(this.service.createPost(dto), HttpStatus.CREATED);
